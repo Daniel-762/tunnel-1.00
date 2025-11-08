@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labyrinth Explorer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-wrapper">
+        <div class="game-header">
+            <div class="game-title">Labyrinth Explorer</div>
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-label">POSITION</div>
+                    <div id="position" class="stat-value">(1, 1)</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">SCORE</div>
+                    <div id="score" class="stat-value">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">TIME</div>
+                    <div id="timer" class="stat-value">0s</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-content">
+            <canvas id="gameCanvas"></canvas>
+            
+            <div class="instructions">
+                Find the glowing artifact in the center of the maze! Use ARROW KEYS to move.
+            </div>
+            
+            <div class="win-message">
+                Success! You Escaped the Labyrinth.
+            </div>
+            
+            <div class="mini-map">
+                <canvas id="miniMap"></canvas>
+            </div>
+            
+            <div class="items-panel">
+                <div class="item">
+                    <div class="item-icon key">K</div>
+                    <div class="item-count">Keys: <span id="keyCount">0</span></div>
+                </div>
+                <div class="item">
+                    <div class="item-icon treasure">T</div>
+                    <div class="item-count">Treasures: <span id="treasureCount">0</span></div>
+                </div>
+            </div>
+            
+            <div class="level-indicator">
+                Level: <span id="level">1</span>
+            </div>
+            
+            <div class="powerup-active" id="powerupDisplay">
+                Power-up Active: <span id="powerupType"></span>
+            </div>
+            
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

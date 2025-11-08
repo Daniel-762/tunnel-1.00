@@ -1,0 +1,293 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0c0c1e, #1a1a3e);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.game-wrapper {
+    position: relative;
+    width: 900px;
+    max-width: 95vw;
+    height: 700px;
+    max-height: 90vh;
+    background: linear-gradient(145deg, #151538, #0e0e2a);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-header {
+    background: rgba(20, 20, 50, 0.9);
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(100, 100, 255, 0.3);
+    z-index: 10;
+}
+
+.game-title {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #6bb5ff, #a3d5ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(107, 181, 255, 0.3);
+}
+
+.stats-container {
+    display: flex;
+    gap: 25px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #a0a0d0;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffcc00;
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.5);
+}
+
+.game-content {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+#gameCanvas {
+    flex: 1;
+    display: block;
+    background: #0a0a25;
+}
+
+.instructions {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: rgba(20, 20, 50, 0.8);
+    padding: 12px;
+    font-size: 16px;
+    transition: opacity 1.5s ease;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(100, 100, 255, 0.2);
+}
+
+.win-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20, 20, 50, 0.95);
+    padding: 40px 60px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 36px;
+    color: #ffcc00;
+    display: none;
+    box-shadow: 0 0 40px rgba(255, 204, 0, 0.7);
+    z-index: 20;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 204, 0, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 40px rgba(255, 204, 0, 0.7); }
+    50% { transform: translate(-50%, -50%) scale(1.05); box-shadow: 0 0 60px rgba(255, 204, 0, 0.9); }
+    100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 40px rgba(255, 204, 0, 0.7); }
+}
+
+.mini-map {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 150px;
+    height: 150px;
+    background: rgba(20, 20, 50, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(100, 100, 255, 0.3);
+    z-index: 5;
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+}
+
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(100, 100, 255, 0.2);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6bb5ff, #a3d5ff);
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.items-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(20, 20, 50, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(100, 100, 255, 0.3);
+    padding: 10px;
+    z-index: 5;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.item-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.key { background: #ffcc00; color: #000; }
+.treasure { background: #ff6b6b; color: #fff; }
+.powerup { background: #6bff6b; color: #000; }
+
+.item-count {
+    font-size: 14px;
+    color: #fff;
+}
+
+.level-indicator {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(20, 20, 50, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(100, 100, 255, 0.3);
+    padding: 10px 15px;
+    z-index: 5;
+    backdrop-filter: blur(5px);
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.powerup-active {
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+    background: rgba(20, 20, 50, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(100, 100, 255, 0.3);
+    padding: 10px 15px;
+    z-index: 5;
+    backdrop-filter: blur(5px);
+    font-size: 14px;
+    color: #6bff6b;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .game-wrapper {
+        height: 85vh;
+    }
+    
+    .game-header {
+        padding: 10px 15px;
+    }
+    
+    .game-title {
+        font-size: 22px;
+    }
+    
+    .stats-container {
+        gap: 15px;
+    }
+    
+    .stat-value {
+        font-size: 16px;
+    }
+    
+    .instructions {
+        font-size: 14px;
+        padding: 10px;
+    }
+    
+    .win-message {
+        font-size: 28px;
+        padding: 30px 40px;
+    }
+    
+    .mini-map {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .items-panel {
+        left: 10px;
+        top: 10px;
+    }
+}
+
+.particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.screen-shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-5px, 5px); }
+    20% { transform: translate(5px, -5px); }
+    30% { transform: translate(-5px, -5px); }
+    40% { transform: translate(5px, 5px); }
+    50% { transform: translate(-5px, 5px); }
+    60% { transform: translate(5px, -5px); }
+    70% { transform: translate(-5px, -5px); }
+    80% { transform: translate(5px, 5px); }
+    90% { transform: translate(-5px, 5px); }
+    100% { transform: translate(0, 0); }
+}
